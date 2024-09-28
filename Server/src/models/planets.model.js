@@ -10,7 +10,6 @@ function isHabitablePlanet(planet) {
     planet["koi_prad"] < 1.6
   );
 }
-
 async function loadPlanetsData() {
   return new Promise((resolve, reject) => {
     fs.createReadStream(
@@ -39,7 +38,6 @@ async function loadPlanetsData() {
   });
 }
 async function getAllPlanets() {
-  // return planets.find({});
   return await planets.find(
     {},
     {
@@ -47,6 +45,8 @@ async function getAllPlanets() {
       __v: 0,
     }
   );
+
+  // return await planets.find({}).select("-_id -__v");
 }
 async function savePlanet(planet) {
   try {
