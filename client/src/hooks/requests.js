@@ -1,4 +1,4 @@
-const API_URL = "http://www.localhost:8000";
+const API_URL = "http://www.localhost:8000/v1";
 async function httpGetPlanets() {
   // TODO: Once API is ready.
   const response = await fetch(`${API_URL}/planets`);
@@ -18,7 +18,7 @@ async function httpGetLaunches() {
 
 async function httpSubmitLaunch(launch) {
   try {
-   const response = await fetch(`${API_URL}/launches`, {
+    const response = await fetch(`${API_URL}/launches`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(launch),
@@ -39,11 +39,10 @@ async function httpSubmitLaunch(launch) {
       data: responseData,
     };
     //added code ends here
-
   } catch (err) {
     return {
       ok: false,
-      message:err.message
+      message: err.message,
     };
   }
   // Submit given launch data to launch system.
