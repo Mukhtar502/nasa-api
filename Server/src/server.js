@@ -1,9 +1,9 @@
 const http = require("http");
-const { mongoConnect } = require("./services/mongo");
-//checking if MongoDb has been connected successfully or if an error is encountered
 
+require("dotenv").config();
+const { mongoConnect } = require("./services/mongo");
 const { loadPlanetsData } = require("./models/planets.model");
-const {loadLaunchesData}= require ("./models/launches.model")
+const { loadLaunchesData } = require("./models/launches.model");
 
 const app = require("./app");
 const PORT = process.env.PORT || 8000;

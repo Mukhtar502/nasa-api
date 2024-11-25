@@ -37,7 +37,7 @@ async function loadPlanetsData() {
         console.log(`${countPlanetFound} habitable planets found!`);
 
         resolve();
-        await saveLaunch(launch);
+        // await saveLaunch(launch);
       });
   });
 }

@@ -2,16 +2,6 @@ const axios = require("axios");
 const launchesDatabase = require("./launches.mongo");
 const planets = require("./planets.mongo");
 const DEFAULT_FLIGHT_NUMBER = 100;
-const launch = {
-  flightNumber: 100, //flight_number
-  mission: "Kepler Exploration X", //name
-  rocket: "Explorer IS1", //rocket.name
-  launchDate: new Date("February 14, 2030"), //date_local
-  target: "Kepler-62 f", //not applicable
-  customers: ["Mukhtar Efunkunle", "NASA"], //payloads.customer
-  upcoming: true, //upcoming
-  success: true, //success
-};
 
 const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query";
 async function populateLaunches() {
@@ -81,7 +71,7 @@ async function existsLaunchWithId(launchId) {
   return await findLaunch({
     flightNumber: launchId,
   });
-} 
+}
 async function getLatestFlightNumber() {
   const latestLaunch = await launchesDatabase.findOne().sort("-flightNumber");
   if (!latestLaunch) {
@@ -90,16 +80,11 @@ async function getLatestFlightNumber() {
   return latestLaunch.flightNumber;
 }
 
-async function getAllLaunches() {
-  return await launchesDatabase.find({}, { _id: 0, __v: 0 })
-.skip(25)
-.limit(50)
-
-
-
-
-
-
+async function getAllLaunches(skip, limit) {
+  return await launchesDatabase
+    .find({}, { _id: 0, __v: 0 })
+    .skip(skip)
+    .limit(limit);
 }
 //trying to get just one launch by using its ID(flightNumber)
 async function getLaunchById(launchId) {
@@ -157,6 +142,5 @@ module.exports = {
   getAllLaunches,
   scheduleNewLaunch,
   saveLaunch,
-  launch,
   abortLaunchById,
 };
