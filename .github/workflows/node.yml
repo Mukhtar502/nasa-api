@@ -13,5 +13,5 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "20"
-      - run: npm install --prefix client # Install dependencies for the client
+      - run: npm install
       - run: npm run build --prefix client # Build the React app
