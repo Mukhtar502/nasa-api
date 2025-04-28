@@ -2,8 +2,8 @@ const axios = require("axios");
 const launchesDatabase = require("./launches.mongo");
 const planets = require("./planets.mongo");
 const DEFAULT_FLIGHT_NUMBER = 100;
+const SPACEX_API_URL = process.env.SPACEX_API_URL;
 
-const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query";
 async function populateLaunches() {
   console.log("Downloading our spaceX launch data...");
   const response = await axios.post(SPACEX_API_URL, {
@@ -59,8 +59,12 @@ async function loadLaunchesData() {
   if (firstLaunch) {
     console.log("Launch data already loaded!");
     return;
-  } else {
+  }
+  try {
     await populateLaunches();
+    console.log("Launch data populated successfully.");
+  } catch (err) {
+    console.error("Failed to populate launches:", err.message);
   }
 }
 async function findLaunch(filter) {
