@@ -15,6 +15,8 @@ RUN npm install -g cross-env
 COPY client/ client/
 RUN npm run build --prefix client
 
+COPY client/build/ /app/server/public/
+
 COPY server/ server/
 
 USER node
